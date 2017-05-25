@@ -1,0 +1,30 @@
+{% load bootstrap3 %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-2.0.3.js"" type="text/javascript"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<style>
+#search {margin-top: 200px;}
+</style>
+</head>
+
+<body>
+<div class='container' id='wrapper'>
+<div class='row' id='search'>
+<center><h1>Twitter Visualization</h1>
+<form action='/classifier/index' method='post' role='form' class='form-inline'>{% csrf_token %}
+	{{ form.non_field_errors }}
+	<div class='form-group'>
+		{{ form.keyword.errors }}
+		{{ form.keyword }}
+	</div>
+	<button type='submit' class='btn btn-primary'>Submit</button>
+</form></center>
+</div>
+</div>
+</body>
+
+</html>

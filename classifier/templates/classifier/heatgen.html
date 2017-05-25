@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>location-history-visualizer</title>
+    <link rel="stylesheet" href="{% static "heatgen.css" %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"/>
+</head>
+<body>
+<div class="visualizer">
+    <!-- Fork me on GitHub -->
+    
+
+    <!-- Shown before the heatmap is displayed -->
+    <div class="container">
+        <div class="content">
+            <!-- Intro, before data has been uploaded -->
+            <div id="intro" class="content-box">
+                <h2>Heatmap Visualizer</h2>
+                <div class="note">
+                   
+                
+               
+                <p>To start off, you'll need to go to <a href="https://google.com/takeout" target="_blank">Google Takeout</a> to download your Location History data. <br /> <b>Then, drag and drop <i>LocationHistory.json</i> from inside that folder onto this page.</b> </p>
+                <p class="fallback">Alternatively, select your <b>LocationHistory.json</b> file directly: <input name="file" type="file" id="file"></input></p>
+                </div>
+            </div>
+
+            <!-- Shown in interim while processing is in progress -->
+            <div id="working" class="content-box hidden">
+                <h2>Processing data...</h2>
+                <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+                <p><span id="currentStatus">Working...</span></p>
+                
+                
+            </div>
+
+            <!-- Content displayed once processing complete -->
+            <div id="done" class="content-box hidden">
+                <h2>Render complete!</h2>
+                <p>Successfully processed <span id="numberProcessed"></span> data points to generate the heatmap. Click inside this box to dismiss it and start exploring...</p>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Appear when heatmap is displayed -->
+    <div id="controls">
+        <div class="title">
+            location-history-visualizer
+            <span>(hover for additional controls)</span>
+        </div>
+        <div class="control-block">
+            <label for="radius">Point radius</label>
+            <input type="range" min="1" max="30" id="radius" class="control">
+        </div>
+        <div class="control-block">
+            <label for="blur">Blur radius</label>
+            <input type="range" min="1" max="25" id="blur" class="control">
+        </div>
+        <div class="control-block">
+            <label for="heatOpacity">Heat opacity</label>
+            <input type="range" min="0" max="1" step="0.05" id="heatOpacity" class="control">
+        </div>
+        <div class="control-block">
+            <label for="tileOpacity">Map opacity</label>
+            <input type="range" min="0" max="1" step="0.05" id="tileOpacity" class="control">
+        </div>
+        <div class="control-block actions">
+            <button id="reset">Reset to defaults</button>
+        </div>
+        <div class="support">
+            <div>Find this useful? Buy me a cup of tea :)</div>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="AGUH8EGVDADM8">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </div>
+    </div>
+
+    <!-- The map, populated by leaflet.js -->
+    <div id="map"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/3.8.4/dropzone.min.js"></script>
+<script src="{% static "leaflet.heat.min.js" %}"></script>
+<script src="{% static "prettysize.js" %}"></script>
+<script src="{% static "heatgen.js" %}"></script>
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91040490-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
