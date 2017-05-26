@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^analysis/(?P<keyword>.+)$', views.analysis_keyword, name='analysis_keyword'),
     url(r'^analysis$', views.analysis_keyword, name='analysis_keyword'),
     url(r'^map$', views.osmap, name='osmap'),
-    url(r'^heatgen$', views.heatgen, name='heatgen'),    
+    url(r'^heatgen$', views.heatgen, name='heatgen'),
 ]

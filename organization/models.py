@@ -9,12 +9,20 @@ from django.utils import timezone
 class OrganizationType(models.Model):
     name = models.CharField(_("Organization Type Name"), max_length=255)
     created = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        verbose_name = _("Organization Type")
+        verbose_name_plural = _("Organization Types")
+
     def __unicode__(self):
         return self.name
 
 class OrganizationSector(models.Model):
     name = models.CharField(_("Organization Sector name"), max_length=255)
     created = models.DateTimeField(default=timezone.now)
+    class Meta:
+        verbose_name = _("Organization Sector")
+        verbose_name_plural = _("Organization Sectors")
 
     def __unicode__(self):
         return self. name
@@ -31,6 +39,9 @@ class OrganizationOfficeType(models.Model):
     Phone_2 = models.CharField(_("Phone line 2"), max_length=255)
     email = models.EmailField(_("Office Email Address"))
     remarks = models.TextField(_("Remarks or Comments"))
+    class Meta:
+        verbose_name = _("Organization Office Type")
+        verbose_name_plural = _("Organization Office Types")
 
     def __unicode__(self):
         return self.name
@@ -54,11 +65,21 @@ class Organization(models.Model):
     # logo = models.ImageField(_("Organization Logo"))
     remarks = models.TextField(_("Remarks or Comments"))
     # offices = models.ForeignKey(organization_models.OrganizationOffice, _("Offices"))
+    class Meta:
+        verbose_name = _("Organization")
+        verbose_name_plural = _("Organizations")
+
+    def __unicode__(self):
+        return self.name
 
 class Facility(models.Model):
     name = models.CharField(_("Facility Name"), max_length=255)
     # facility = models.CharField(_("Facility"), max_length=255, null=True, blank=True)
     created = models.DateTimeField(default=timezone.now)
+    class Meta:
+        verbose_name = _("Facility")
+        verbose_name_plural = _("Facilities")
+
     def __unicode__(self):
         return self.name
 
@@ -85,6 +106,9 @@ class StaffMember(models.CharField):
     end_date = models.DateField(_("End Date"), auto_now=False)
     status = models.CharField(_("Status"), max_length=255, choices=STAFF_STATUS)
     organization = models.ForeignKey(Organization)
+    class Meta:
+        verbose_name = _("Staff Member")
+        verbose_name_plural = _("Staff Members")
 
     def __unicode__(self):
         return self.name
@@ -113,6 +137,9 @@ class Asset(models.Model):
     currency = models.CharField(_("Currency"), max_length=255, choices=CURRENCY_CHOICES)
     condition = models.CharField(_("Condition"), help_text=_("e.g good, bad etc"), max_length=255)
     comments = models.TextField(_("Comments on Asset"))
+    class Meta:
+        verbose_name = _("Asset")
+        verbose_name_plural = _("Assets")
 
     def __unicode__(self):
         return self.asset_number
@@ -120,6 +147,9 @@ class Asset(models.Model):
 class ProgrammeStatusChoices(models.Model):
     name = models.CharField(_("Programe Status Name"), help_text=_("e.g pending, active etc"), max_length=255)
     comments = models.TextField(_("Comments"))
+    class Meta:
+        verbose_name = _("Programme Status Choice")
+        verbose_name_plural = _("Programme Status Choice")
 
     def __unicode__(self):
         return self.name
@@ -133,6 +163,9 @@ class Programme(models.Model):
     end_date = models.DateField(_("End Date"), auto_now=False)
     # contact_person = models.ForeignKey(StaffMember)
     comments = models.TextField(_("Comments"))
+    class Meta:
+        verbose_name = _("Programme")
+        verbose_name_plural = _("Programmes")
 
     def __unicode__(self):
         return self.name
@@ -146,6 +179,9 @@ class Department(models.Model):
     name = models.CharField(_("Department Name"), max_length=255)
     organization = models.ForeignKey(Organization)
     description = models.TextField(_("Description"))
+    class Meta:
+        verbose_name = _("Department")
+        verbose_name_plural = _("Departments")
 
     def __unicode__(Self):
         return self.name
@@ -159,6 +195,9 @@ class Person(models.Model):
     date_of_birth = models.DateField(_("Date of birth"), auto_now=False)
     remarks = models.TextField(_("Remarks"), null=True, blank=True)
     # organization = models.ForeignKey(Organization, _("Organization"))
+    class Meta:
+        verbose_name = _("Person")
+        verbose_name_plural = _("Persons")
 
     def __unicode__(self):
         return self.name
@@ -166,6 +205,9 @@ class Person(models.Model):
 class Skill(models.Model):
     name = models.CharField(_("Name"), max_length=255)
     comments = models.TextField(_("Comments"))
+    class Meta:
+        verbose_name = _("Skill")
+        verbose_name_plural = _("Skills")
 
     def __unicode__(Self):
         return self.name
@@ -173,6 +215,9 @@ class Skill(models.Model):
 class Competency(models.Model):
     name = models.CharField(_("Competency Name"), max_length=255)
     priority = models.IntegerField(_("Priority"), help_text=_("Priority from 1 to 9, 1 is most prefferd."))
+    class Meta:
+        verbose_name = _("Competency")
+        verbose_name_plural = _("Competences")
 
     def __unicode__(self):
         return self.name
@@ -182,6 +227,9 @@ class StaffSkills(models.Model):
     skill = models.ForeignKey(Skill)
     competency = models.ForeignKey(Competency)
     Organization = models.ForeignKey(Organization)
+    class Meta:
+        verbose_name = _("Staff Skill")
+        verbose_name_plural = _("Staff Skills")
 
     def __unicode__(Self):
         return self.person
@@ -194,6 +242,9 @@ class JobTitleCatalog(models.Model):
     name = models.CharField(_("Job Title"), max_length=255)
     typ = models.CharField(_("Type"), max_length=255, choices=JOB_TYPE_CHOICES)
     description = models.TextField(_("Job Descritpion"))
+    class Meta:
+        verbose_name = _("Job Title Catalog")
+        verbose_name_plural = _("Job Title Catalog")
 
     def __unicode__(Self):
         return self.name
